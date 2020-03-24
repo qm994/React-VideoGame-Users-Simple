@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import AddUser from "./AddUser"
-
+import AddUser from "./AddUser";
+import UserScore from "./UserScore";
 
 class App extends Component {
 
   state = {
     users: [
-      {firstName: "Qingyuan", lastName: "Ma", userName: "ma791778711"},
-      {firstName: "Qiyuan", lastName: "Ma", userName: "maqiyuanAlan"}
+      {firstName: "Qingyuan", lastName: "Ma", userName: "ma791778711", numGamesPlayed: "11"},
+      {firstName: "Qiyuan", lastName: "Ma", userName: "maqiyuanAlan", numGamesPlayed: "11"}
     ]
   };
 
   createContact = (newUser) => {
+    newUser.numGamesPlayed = 0;
     this.setState(
       currentState => ({
         users: [...currentState.users, newUser]
@@ -30,7 +31,8 @@ class App extends Component {
         </header>
 
         <AddUser users={this.state.users} onAddUser={this.createContact}/>
-    <p>{JSON.stringify(this.state.users)}</p>
+        <p>{JSON.stringify(this.state.users)}</p>
+        <UserScore users={this.state.users} />
       </div>
     );
   }
